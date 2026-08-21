@@ -1,19 +1,25 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose from "mongoose";
+import  { Document, Schema } from "mongoose";
+export enum UserRole{Member="member", Trainer="trainer"}
 
-export interface IUser extends Document {
+
+
+
+export interface User extends Document {
   name: string;
   email: string;
   password: string;
-  role: "Member" | "Trainer";
+  role: UserRole;
 }
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<User>(
   {
     name: {
       type: String,
       required: true,
       trim: true,
     },
+
 
     email: {
       type: String,
@@ -27,12 +33,13 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       minlength: 6,
+      unique:true,
     },
 
     role: {
       type: String,
-      enum: ["Member", "Trainer"],
-      default: "Member",
+      enum:Object.values(UserRole),
+      default: UserRole.Member,
     },
   },
   {
@@ -40,6 +47,6 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-const User = mongoose.model<IUser>("User", userSchema);
+const User = mongoose.model<User>('User', userSchema);
 
 export default User;
