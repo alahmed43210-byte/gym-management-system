@@ -1,5 +1,5 @@
-import { Trainer } from "./Trainersmodel.js";
-import { Bookings } from "./Bookingsmodel.js";
+import { Trainer } from "../models/Trainermodel.js";
+import { Bookings } from "../models/Bookingsmodel.js";
 import mongoose from "mongoose";
 import  { Document, Schema } from "mongoose";
 
