@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import  jwt  from "jsonwebtoken";
 import { UserRole } from "../models/Usersmodel.js";
-import { JsonWebTokenError } from "jsonwebtoken";
-import  { TokenExpiredError} from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 
 export interface AuthRequest extends Request {
@@ -50,7 +48,7 @@ export const authMiddleware = (
     req.user = decoded;
     next();
   } catch (error) {
-    if (error instanceof TokenExpiredError) {
+    if (error instanceof jwt.TokenExpiredError) {
       res.status(401).json({
         success: false,
         message: "Token has expired",
@@ -58,7 +56,7 @@ export const authMiddleware = (
       return;
     }
 
-    if (error instanceof JsonWebTokenError) {
+    if (error instanceof jwt.JsonWebTokenError) {
       res.status(401).json({
         success: false,
         message: "Invalid token",
