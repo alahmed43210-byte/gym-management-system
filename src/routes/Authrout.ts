@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register, login } from "../controllers/Authenticationcontroller.js"; // تأكد من ضبط المسار حسب اسم ملف الـ Controller لديك
+import { register, login } from "../controllers/Authenticationcontroller.js";  
 
 const router = Router();
 
